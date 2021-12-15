@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AuthApp
 {
-    public class Auth
+    public class Auth : User
     {
         //public string Username { get; private set; }
         //public string Password { get; private set; }
@@ -14,7 +14,24 @@ namespace AuthApp
         //    Password = password;
         //}
         public Auth() { }
-
+        public string Login(string username, string password, List<User> users)
+        {
+            foreach (User user in users)
+            {
+                if (username == user.UserName)
+                {
+                    if (password == user.Password)
+                    {
+                        return "Login Berhasil";
+                    }
+                    else
+                    {
+                        return "Password Salah";
+                    }
+                }
+            }
+            return "Username tidak ditemukan";
+        }
 
     }
 }
