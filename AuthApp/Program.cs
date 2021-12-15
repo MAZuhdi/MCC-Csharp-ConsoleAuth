@@ -51,6 +51,12 @@ namespace AuthApp
                         LoginMenu(users, auth);
                         break;
                     case 7:
+                        auth.CheckLogin();
+                        break;
+                    case 8:
+                        auth.Logout();
+                        break;
+                    case 9:
                         run = false;
                         Console.WriteLine("APLIKASI DITUTUP..");
                         break;
@@ -71,7 +77,9 @@ namespace AuthApp
             Console.WriteLine("4. Show User");
             Console.WriteLine("5. Search User");
             Console.WriteLine("6. Login");
-            Console.WriteLine("7. Exit");
+            Console.WriteLine("7. Check Login");
+            Console.WriteLine("8. Logout");
+            Console.WriteLine("9. Exit");
             Console.Write("=> ");
         }
 

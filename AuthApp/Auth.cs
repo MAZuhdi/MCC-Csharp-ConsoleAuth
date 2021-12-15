@@ -37,11 +37,17 @@ namespace AuthApp
                 UserName != null && 
                 Password != null)
             {
+                Console.Clear();
+                Console.WriteLine("Check Login");
                 Details();
+                Console.WriteLine("Tekan apa saja untuk kembali..");
+                Console.ReadKey();
             }
             else
             {
-                Console.WriteLine("Belum login");
+                Console.WriteLine("Anda belum login");
+                Console.WriteLine("Tekan apa saja untuk kembali..");
+                Console.ReadKey();
             }
         }
 
@@ -57,10 +63,17 @@ namespace AuthApp
                 LastName = null;
                 UserName = null;
                 Password = null;
+                Console.Clear();
+                Console.WriteLine("Berhasil Logout");
+                Console.WriteLine("Tekan apa saja untuk kembali..");
+                Console.ReadKey();
             }
             else
             {
-                Console.WriteLine("Belum login");
+                Console.Clear();
+                Console.WriteLine("Anda belum login");
+                Console.WriteLine("Tekan apa saja untuk kembali..");
+                Console.ReadKey();
             }
         }
 
