@@ -220,8 +220,8 @@ namespace AuthApp
                         string lastName = Console.ReadLine();
                         Console.Write("Password: ");
                         string password = Console.ReadLine();
-                        if (firstName != String.Empty && lastName != String.Empty && password != String.Empty && firstName.Length >= 2 && lastName.Length >= 2)
-                        //if (firstName != "" && lastName != "" && password != "" && firstName.Length >=2 && lastName.Length >=2)
+
+                        if (firstName != "" && lastName != "" && password != "" && firstName.Length >=2 && lastName.Length >=2)
                         {
                             editUser.FirstName = firstName;
                             editUser.LastName = lastName;
