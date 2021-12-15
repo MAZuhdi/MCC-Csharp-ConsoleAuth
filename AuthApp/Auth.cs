@@ -14,7 +14,5 @@ namespace AuthApp
         //    Password = password;
         //}
         public Auth() { }
-
-
     }
 }

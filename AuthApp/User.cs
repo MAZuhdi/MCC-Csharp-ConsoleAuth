@@ -39,6 +39,5 @@ namespace AuthApp
             Console.WriteLine($"Password    : {Password}");
         }
 
-
     }
 }
