@@ -66,7 +66,7 @@ namespace AuthApp
             Console.WriteLine("Silahkan pilih menu:     ");
             Console.WriteLine("1. Create User");
             Console.WriteLine("2. Edit User");
-            Console.WriteLine("3. Update User");
+            Console.WriteLine("3. Delete User");
             Console.WriteLine("4. Show User");
             Console.WriteLine("5. Search User");
             Console.WriteLine("6. Login");
@@ -134,25 +134,6 @@ namespace AuthApp
             Console.WriteLine(auth.Login(username, password, users));
             Console.ReadKey();
         }
-
-        //public static string Login(string username, string password, List<User> users)
-        //{
-        //    foreach (User user in users)
-        //    {
-        //        if (username == user.UserName)
-        //        {
-        //            if (password == user.Password)
-        //            {
-        //                return "Login Berhasil";
-        //            }
-        //            else
-        //            {
-        //                return "Password Salah";
-        //            }
-        //        }
-        //    }
-        //    return "Username tidak ditemukan";
-        //}
 
         public static void EditUser(List<User> users)
         {
@@ -226,7 +207,6 @@ namespace AuthApp
                 }
                 else
                 {
-                    Console.Clear();
                     Console.WriteLine("Username yang ingin didelete tidak ada!");
                     Console.ReadLine();
                     Console.Clear();

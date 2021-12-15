@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AuthApp
 {
-    public class Auth
+    public class Auth : User
     {
         //public string Username { get; private set; }
         //public string Password { get; private set; }
