@@ -6,7 +6,7 @@ namespace AuthApp
     class Program
     {
         public static List<User> users = new List<User>();
-        Auth auth = new Auth();
+        public static Auth auth = new Auth();
         static void Main(string[] args)
         {
 
