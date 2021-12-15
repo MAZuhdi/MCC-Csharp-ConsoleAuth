@@ -131,28 +131,28 @@ namespace AuthApp
             Console.Write("Password:");
             string password = Console.ReadLine();
 
-            Console.WriteLine(Login(username, password, users));;
+            Console.WriteLine(auth.Login(username, password, users));
             Console.ReadKey();
         }
 
-        public static string Login(string username, string password, List<User> users)
-        {
-            foreach (User user in users)
-            {
-                if (username == user.UserName)
-                {
-                    if (password == user.Password)
-                    {
-                        return "Login Berhasil";
-                    }
-                    else
-                    {
-                        return "Password Salah";
-                    }
-                }
-            }
-            return "Username tidak ditemukan";
-        }
+        //public static string Login(string username, string password, List<User> users)
+        //{
+        //    foreach (User user in users)
+        //    {
+        //        if (username == user.UserName)
+        //        {
+        //            if (password == user.Password)
+        //            {
+        //                return "Login Berhasil";
+        //            }
+        //            else
+        //            {
+        //                return "Password Salah";
+        //            }
+        //        }
+        //    }
+        //    return "Username tidak ditemukan";
+        //}
 
         public static void EditUser(List<User> users)
         {
