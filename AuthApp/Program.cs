@@ -33,22 +33,22 @@ namespace AuthApp
                 switch (choiceMenu)
                 {
                     case 1:
-                        users.Add(CreateUser(users));
+                        users.Add(CreateUser());
                         break;
                     case 2:
-                        EditUser(users);
+                        EditUser();
                         break;
                     case 3:
-                        DeleteUser(users);
+                        DeleteUser();
                         break;
                     case 4:
-                        ShowUser(users);
+                        ShowUser();
                         break;
                     case 5:
-                        SearchUser(users);
+                        SearchUser();
                         break;
                     case 6:
-                        LoginMenu(users, auth);
+                        LoginMenu();
                         break;
                     case 7:
                         auth.CheckLogin();
@@ -83,7 +83,7 @@ namespace AuthApp
             Console.Write("=> ");
         }
 
-        private static User CreateUser(List<User> users)
+        private static User CreateUser()
         {
             User user = new User();
             Console.Clear();
@@ -127,7 +127,7 @@ namespace AuthApp
             return user;
         }
 
-        public static void ShowUser(List<User> users)
+        public static void ShowUser()
         {
             Console.Clear();
             Console.Write("2. Show User");
@@ -139,7 +139,7 @@ namespace AuthApp
             Console.ReadKey();
         }
 
-        public static void SearchUser(List<User> users)
+        public static void SearchUser()
         {
             Console.Clear();
             Console.Write("3. Search Username: ");
@@ -158,7 +158,7 @@ namespace AuthApp
         }
 
 
-        public static void LoginMenu(List<User> users, Auth auth)
+        public static void LoginMenu()
         {
             Console.Clear();
             Console.Write("Username:");
@@ -169,7 +169,7 @@ namespace AuthApp
             Console.ReadKey();
         }
 
-        public static void EditUser(List<User> users)
+        public static void EditUser()
         {
             User editUser = null;
             string enteredUsername;
@@ -222,6 +222,13 @@ namespace AuthApp
                             editUser.Password = password;
                             editUser.SetUsername(users);
                             Console.WriteLine("\nUser Created!");
+                            if (enteredUsername == auth.UserName)
+                            {
+                                auth.FirstName = firstName;
+                                auth.LastName = lastName;
+                                auth.Password = password;
+                                auth.UserName = editUser.UserName;
+                            }
                         }
                         else
                         {
@@ -254,20 +261,25 @@ namespace AuthApp
 
         }
 
-        static void DeleteUser(List<User> users)
+        static void DeleteUser()
         {
             string deleteUser;
             Console.Clear();
             Console.WriteLine("");
             Console.Write("Masukkan Username yang ingin anda delete: ");
             deleteUser = Console.ReadLine();
-
             for (int i = 0; i < users.Count; i++)
             {
                 if (users[i].UserName == deleteUser)
                 {
                     Console.WriteLine("Username yang akan didelete: " + deleteUser);
-
+                    if (auth != null)
+                    {
+                        if (auth.UserName == deleteUser)
+                        {
+                            auth = new Auth();
+                        }
+                    }
                     users.RemoveAt(i);
                     Console.WriteLine("User berhasil didelete");
                     Console.WriteLine("Press any key to continue...");
