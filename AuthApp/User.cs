@@ -26,7 +26,6 @@ namespace AuthApp
                     Random random = new Random();
                     newUserName = newUserName + random.Next(0, 99);
                 }
-             
             }
             UserName = newUserName;
         }

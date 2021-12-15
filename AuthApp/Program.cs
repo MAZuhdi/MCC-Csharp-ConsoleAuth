@@ -6,6 +6,7 @@ namespace AuthApp
     class Program
     {
         public static List<User> users = new List<User>();
+        public static Auth auth = new Auth();
         static void Main(string[] args)
         {
 
@@ -47,9 +48,15 @@ namespace AuthApp
                         SearchUser(users);
                         break;
                     case 6:
-                        LoginMenu(users);
+                        LoginMenu(users, auth);
                         break;
                     case 7:
+                        auth.CheckLogin();
+                        break;
+                    case 8:
+                        auth.Logout();
+                        break;
+                    case 9:
                         run = false;
                         Console.WriteLine("APLIKASI DITUTUP..");
                         break;
@@ -70,7 +77,9 @@ namespace AuthApp
             Console.WriteLine("4. Show User");
             Console.WriteLine("5. Search User");
             Console.WriteLine("6. Login");
-            Console.WriteLine("7. Exit");
+            Console.WriteLine("7. Check Login");
+            Console.WriteLine("8. Logout");
+            Console.WriteLine("9. Exit");
             Console.Write("=> ");
         }
 
@@ -149,15 +158,13 @@ namespace AuthApp
         }
 
 
-        public static void LoginMenu(List<User> users)
+        public static void LoginMenu(List<User> users, Auth auth)
         {
             Console.Clear();
-            Auth auth = new Auth();
             Console.Write("Username:");
             string username = Console.ReadLine();
             Console.Write("Password:");
             string password = Console.ReadLine();
-
             Console.WriteLine(auth.Login(username, password, users));
             Console.ReadKey();
         }
