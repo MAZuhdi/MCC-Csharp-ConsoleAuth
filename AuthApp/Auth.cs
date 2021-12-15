@@ -6,13 +6,6 @@ namespace AuthApp
 {
     public class Auth : User
     {
-        //public string Username { get; private set; }
-        //public string Password { get; private set; }
-        //public Auth(string username, string password)
-        //{
-        //    Username = username;
-        //    Password = password;
-        //}
         public Auth() { }
         public string Login(string username, string password, List<User> users)
         {
@@ -22,6 +15,10 @@ namespace AuthApp
                 {
                     if (password == user.Password)
                     {
+                        FirstName = user.FirstName;
+                        LastName = user.LastName;
+                        UserName = user.UserName;
+                        Password = user.Password;
                         return "Login Berhasil";
                     }
                     else
@@ -31,6 +28,40 @@ namespace AuthApp
                 }
             }
             return "Username tidak ditemukan";
+        }
+
+        public void CheckLogin()
+        {
+            if (FirstName != null && 
+                LastName != null && 
+                UserName != null && 
+                Password != null)
+            {
+                Details();
+            }
+            else
+            {
+                Console.WriteLine("Belum login");
+            }
+        }
+
+        public void Logout()
+        {
+            Console.WriteLine("Berhasil Logout");
+            if (FirstName != null &&
+                LastName != null &&
+                UserName != null &&
+                Password != null)
+            {
+                FirstName = null;
+                LastName = null;
+                UserName = null;
+                Password = null;
+            }
+            else
+            {
+                Console.WriteLine("Belum login");
+            }
         }
 
     }

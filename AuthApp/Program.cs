@@ -6,6 +6,7 @@ namespace AuthApp
     class Program
     {
         public static List<User> users = new List<User>();
+        Auth auth = new Auth();
         static void Main(string[] args)
         {
 
@@ -47,7 +48,7 @@ namespace AuthApp
                         SearchUser(users);
                         break;
                     case 6:
-                        LoginMenu(users);
+                        LoginMenu(users, auth);
                         break;
                     case 7:
                         run = false;
@@ -122,15 +123,13 @@ namespace AuthApp
         }
 
 
-        public static void LoginMenu(List<User> users)
+        public static void LoginMenu(List<User> users, Auth auth)
         {
             Console.Clear();
-            Auth auth = new Auth();
             Console.Write("Username:");
             string username = Console.ReadLine();
             Console.Write("Password:");
             string password = Console.ReadLine();
-
             Console.WriteLine(auth.Login(username, password, users));
             Console.ReadKey();
         }
