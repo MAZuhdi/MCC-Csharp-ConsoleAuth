@@ -108,7 +108,7 @@ namespace AuthApp
                     user.Password = Console.ReadLine();
                     user.SetUsername(users);
 
-                    if (user.FirstName != String.Empty && user.LastName != String.Empty && user.Password != String.Empty && user.FirstName.Length >= 2 && user.LastName.Length >= 2)
+                    if (!String.IsNullOrWhiteSpace(user.FirstName) && !String.IsNullOrWhiteSpace(user.LastName) &&  !String.IsNullOrWhiteSpace(user.Password) && user.FirstName.Length >= 2 && user.LastName.Length >= 2)
                         //if (user.FirstName != "" && user.LastName != "" && user.Password != "" && user.FirstName.Length >= 2 && user.LastName.Length >= 2)
                     {
                         Console.WriteLine("\nUser Created!");
