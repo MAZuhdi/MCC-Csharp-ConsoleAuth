@@ -70,6 +70,11 @@ namespace AuthApp
         {
             Console.WriteLine("=========================");
             Console.WriteLine("=====Selamat datang======");
+            if (auth.FirstName != null)
+            {
+                Console.WriteLine("Halo, " + auth.FirstName);
+            }
+            Console.WriteLine("=========================");
             Console.WriteLine("Silahkan pilih menu:     ");
             Console.WriteLine("1. Create User");
             Console.WriteLine("2. Edit User");
@@ -99,7 +104,8 @@ namespace AuthApp
                     user.Password = Console.ReadLine();
                     user.SetUsername(users);
 
-                    if (user.FirstName != "" && user.LastName != "" && user.Password != "" && user.FirstName.Length >= 2 && user.LastName.Length >= 2)
+                    if (user.FirstName != String.Empty && user.LastName != String.Empty && user.Password != String.Empty && user.FirstName.Length >= 2 && user.LastName.Length >= 2)
+                        //if (user.FirstName != "" && user.LastName != "" && user.Password != "" && user.FirstName.Length >= 2 && user.LastName.Length >= 2)
                     {
                         Console.WriteLine("\nUser Created!");
                     }
@@ -214,8 +220,8 @@ namespace AuthApp
                         string lastName = Console.ReadLine();
                         Console.Write("Password: ");
                         string password = Console.ReadLine();
-
-                        if (firstName != "" && lastName != "" && password != "" && firstName.Length >=2 && lastName.Length >=2)
+                        if (firstName != String.Empty && lastName != String.Empty && password != String.Empty && firstName.Length >= 2 && lastName.Length >= 2)
+                        //if (firstName != "" && lastName != "" && password != "" && firstName.Length >=2 && lastName.Length >=2)
                         {
                             editUser.FirstName = firstName;
                             editUser.LastName = lastName;
@@ -257,29 +263,45 @@ namespace AuthApp
         static void DeleteUser(List<User> users)
         {
             string deleteUser;
+            string msg = "";
             Console.Clear();
             Console.WriteLine("");
             Console.Write("Masukkan Username yang ingin anda delete: ");
             deleteUser = Console.ReadLine();
-
+            
             for (int i = 0; i < users.Count; i++)
             {
                 if (users[i].UserName == deleteUser)
                 {
+                    if (auth.UserName != null)
+                    {
+                        if (auth.UserName == deleteUser)
+                        {
+                            Console.WriteLine("Username tidak bisa dihapus");
+                            Console.ReadKey();
+                            break;
+                        }
+                    }
                     Console.WriteLine("Username yang akan didelete: " + deleteUser);
 
                     users.RemoveAt(i);
-                    Console.WriteLine("User berhasil didelete");
-                    Console.WriteLine("Press any key to continue...");
-                    Console.ReadLine();
+                    msg = "User berhasil didelete";
+                    //Console.WriteLine("User berhasil didelete");
+                    //Console.WriteLine("Press any key to continue...");
+                    //Console.ReadLine();
                 }
                 else
                 {
-                    Console.WriteLine("Username yang ingin didelete tidak ada!");
-                    Console.ReadLine();
-                    Console.Clear();
+                    msg = "Username yang ingin didelete tidak ada!";
+                    //Console.WriteLine("Username yang ingin didelete tidak ada!");
+                    //Console.ReadLine();
+                    //Console.Clear();
                 }
             }
+            Console.WriteLine(msg);
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadLine();
+            Console.Clear();
         }
 
     }
