@@ -27,7 +27,7 @@ namespace AuthApp
                     newUserName = newUserName + random.Next(0, 99);
                 }
             }
-            UserName = newUserName;
+            UserName = newUserName.Replace(" ","_");
         }
 
         public void Details()

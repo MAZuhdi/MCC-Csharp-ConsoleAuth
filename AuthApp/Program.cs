@@ -59,6 +59,8 @@ namespace AuthApp
                     case 9:
                         run = false;
                         Console.WriteLine("APLIKASI DITUTUP..");
+                        Console.WriteLine("===================================");
+                        Console.WriteLine("Terima Kasih telah menggunakan aplikasi kami");
                         break;
                     default:
                         break;
@@ -68,8 +70,13 @@ namespace AuthApp
 
         public static void Menu()
         {
-            Console.WriteLine("=========================");
-            Console.WriteLine("=====Selamat datang======");
+            Console.WriteLine("===================================");
+            Console.WriteLine("========= Selamat datang ==========");
+            if (auth.FirstName != null)
+            {
+                Console.WriteLine("Halo, " + auth.FirstName);
+            }
+            Console.WriteLine("===================================");
             Console.WriteLine("Silahkan pilih menu:     ");
             Console.WriteLine("1. Create User");
             Console.WriteLine("2. Edit User");
@@ -91,6 +98,8 @@ namespace AuthApp
             {
                 try
                 {
+                    Console.WriteLine("1. Create User");
+                    Console.WriteLine("===============");
                     Console.Write("Nama Depan: ");
                     user.FirstName = Console.ReadLine();
                     Console.Write("Nama Belakang: ");
@@ -99,13 +108,14 @@ namespace AuthApp
                     user.Password = Console.ReadLine();
                     user.SetUsername(users);
 
-                    if (user.FirstName != "" && user.LastName != "" && user.Password != "" && user.FirstName.Length >= 2 && user.LastName.Length >= 2)
+                    if (user.FirstName != String.Empty && user.LastName != String.Empty && user.Password != String.Empty && user.FirstName.Length >= 2 && user.LastName.Length >= 2)
+                        //if (user.FirstName != "" && user.LastName != "" && user.Password != "" && user.FirstName.Length >= 2 && user.LastName.Length >= 2)
                     {
                         Console.WriteLine("\nUser Created!");
                     }
                     else {
                         Console.WriteLine("\nInput tidak valid");
-                        Console.WriteLine("Press any key to continue");
+                        Console.WriteLine("\nTekan apa saja untuk kembali");
                         Console.ReadKey();
                         Console.Clear();
                         continue;
@@ -114,7 +124,7 @@ namespace AuthApp
                 catch (Exception)
                 {
                     Console.WriteLine("\nInput tidak valid");
-                    Console.WriteLine("Press any key to continue");
+                    Console.WriteLine("Tekan apa saja untuk melanjutkan");
                     Console.ReadKey();
                     Console.Clear();
                     continue;
@@ -122,7 +132,7 @@ namespace AuthApp
                 break;
             } while (true);
 
-            Console.WriteLine("\nPress any key to continue");
+            Console.WriteLine("\nTekan apa saja untuk melanjutkan");
             Console.ReadKey();
             return user;
         }
@@ -130,19 +140,22 @@ namespace AuthApp
         public static void ShowUser()
         {
             Console.Clear();
-            Console.Write("2. Show User");
+            Console.WriteLine("4. Show User");
+            Console.WriteLine("===============");
             foreach (User user in users)
             {
                 user.Details();
             }
-            Console.WriteLine("Tekan apa saja untuk kembali..");
+            Console.WriteLine("\nTekan apa saja untuk kembali..");
             Console.ReadKey();
         }
 
         public static void SearchUser()
         {
             Console.Clear();
-            Console.Write("3. Search Username: ");
+            Console.WriteLine ("5. Search User");
+            Console.WriteLine("====================");
+            Console.Write("Search Username: ");
             string searchedUsername = Console.ReadLine();
             foreach (User user in users)
             {
@@ -151,9 +164,9 @@ namespace AuthApp
                     user.Details();
                     break;
                 }
-                Console.WriteLine("USERNAME TIDAK DITEMUKAN");
+                Console.WriteLine("Username tidak ditemukan");
             }
-            Console.WriteLine("Tekan apa saja untuk kembali..");
+            Console.WriteLine("\nTekan apa saja untuk kembali..");
             Console.ReadKey();
         }
 
@@ -161,6 +174,8 @@ namespace AuthApp
         public static void LoginMenu()
         {
             Console.Clear();
+            Console.WriteLine("6. Login");
+            Console.WriteLine("===========");
             Console.Write("Username:");
             string username = Console.ReadLine();
             Console.Write("Password:");
@@ -173,7 +188,10 @@ namespace AuthApp
         {
             User editUser = null;
             string enteredUsername;
-            Console.Write("Username :");
+            Console.Clear();
+            Console.WriteLine("2. Edit User");
+            Console.WriteLine("===============");
+            Console.Write("Cari username :");
             do
             {
                 try
@@ -215,7 +233,7 @@ namespace AuthApp
                         Console.Write("Password: ");
                         string password = Console.ReadLine();
 
-                        if (firstName != "" && lastName != "" && password != "" && firstName.Length >=2 && lastName.Length >=2)
+                        if (firstName != String.Empty && lastName != String.Empty && password != String.Empty && firstName.Length >=2 && lastName.Length >=2)
                         {
                             editUser.FirstName = firstName;
                             editUser.LastName = lastName;
@@ -233,7 +251,7 @@ namespace AuthApp
                         else
                         {
                             Console.WriteLine("\nInput tidak valid");
-                            Console.WriteLine("Press any key to continue");
+                            Console.WriteLine("Tekan apa saja untuk melanjutkan");
                             Console.ReadKey();
                             Console.Clear();
                             continue;
@@ -243,7 +261,7 @@ namespace AuthApp
                     catch (Exception)
                     {
                         Console.WriteLine("\nInput tidak valid");
-                        Console.WriteLine("Press any key to continue");
+                        Console.WriteLine("\nTekan apa saja untuk melanjutkan");
                         Console.ReadKey();
                         Console.Clear();
                         continue;
@@ -264,14 +282,25 @@ namespace AuthApp
         static void DeleteUser()
         {
             string deleteUser;
+            string msg = "";
             Console.Clear();
             Console.WriteLine("");
             Console.Write("Masukkan Username yang ingin anda delete: ");
             deleteUser = Console.ReadLine();
+            
             for (int i = 0; i < users.Count; i++)
             {
                 if (users[i].UserName == deleteUser)
                 {
+                    if (auth.UserName != null)
+                    {
+                        if (auth.UserName == deleteUser)
+                        {
+                            Console.WriteLine("Username tidak bisa dihapus");
+                            Console.ReadKey();
+                            break;
+                        }
+                    }
                     Console.WriteLine("Username yang akan didelete: " + deleteUser);
                     if (auth != null)
                     {
@@ -281,17 +310,17 @@ namespace AuthApp
                         }
                     }
                     users.RemoveAt(i);
-                    Console.WriteLine("User berhasil didelete");
-                    Console.WriteLine("Press any key to continue...");
-                    Console.ReadLine();
+                    msg = "User berhasil didelete";
                 }
                 else
                 {
-                    Console.WriteLine("Username yang ingin didelete tidak ada!");
-                    Console.ReadLine();
-                    Console.Clear();
+                    msg = "Username yang ingin didelete tidak ada!";
                 }
             }
+            Console.WriteLine(msg);
+            Console.WriteLine("\nTekan apa saja untuk kembali");
+            Console.ReadLine();
+            Console.Clear();
         }
 
     }

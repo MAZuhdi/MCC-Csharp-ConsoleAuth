@@ -39,6 +39,7 @@ namespace AuthApp
             {
                 Console.Clear();
                 Console.WriteLine("Check Login");
+                Console.WriteLine("===============");
                 Details();
                 Console.WriteLine("Tekan apa saja untuk kembali..");
                 Console.ReadKey();
