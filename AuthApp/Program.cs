@@ -50,13 +50,22 @@ namespace AuthApp
                     case 5:
                         SearchUser();
                         break;
+                    
                     case 6:
-                        LoginMenu();
-                        break;
-                    case 7:
-                        auth.Logout();
-                        break;
-                    case 8:
+                    if (auth.UserName == null)
+                    {
+                      LoginMenu();
+                      break;
+                    }
+                    else
+                    {
+                      auth.Logout();
+                      break;
+                    }   
+                    //case 7:
+                    //    auth.Logout();
+                    //    break;
+                    case 99:
                         run = false;
                         Console.WriteLine("APLIKASI DITUTUP..");
                         Console.WriteLine("===================================");
@@ -87,9 +96,15 @@ namespace AuthApp
             Console.WriteLine("3. Delete User");
             Console.WriteLine("4. Show User");
             Console.WriteLine("5. Search User");
+            if(auth.UserName == null)
+            { 
             Console.WriteLine("6. Login");
-            Console.WriteLine("7. Logout");
-            Console.WriteLine("8. Exit");
+            }
+            else
+            { 
+            Console.WriteLine("6. Logout");
+            }
+            Console.WriteLine("99. Exit");
             Console.Write("=> ");
         }
 
@@ -108,7 +123,8 @@ namespace AuthApp
                     Console.Write("Nama Belakang: ");
                     user.LastName = Console.ReadLine();
                     Console.Write("Password: ");
-                    user.Password = Console.ReadLine();
+                    string hasPassword = BCrypt.Net.BCrypt.HashPassword(Console.ReadLine());
+                    user.Password = hasPassword;
                     user.SetUsername(users);
 
                     if (user.Validate(user.FirstName, user.LastName, user.Password))
@@ -185,6 +201,8 @@ namespace AuthApp
 
         public static void LoginMenu()
         {
+            if (auth.UserName == null)
+            {
             Console.Clear();
             Console.WriteLine("6. Login");
             Console.WriteLine("===========");
@@ -194,6 +212,7 @@ namespace AuthApp
             string password = Console.ReadLine();
             Console.WriteLine(auth.Login(username, password, users));
             Console.ReadKey();
+            }
         }
 
         public static void EditUser()
@@ -243,7 +262,8 @@ namespace AuthApp
                         Console.Write("Nama Belakang: ");
                         string lastName = Console.ReadLine();
                         Console.Write("Password: ");
-                        string password = Console.ReadLine();
+                        string hasPassword = BCrypt.Net.BCrypt.HashPassword(Console.ReadLine());
+                        string password = hasPassword;
 
                         if (editUser.Validate(firstName, lastName, password))
                         {
