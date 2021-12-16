@@ -32,6 +32,9 @@ namespace AuthApp
 
                 switch (choiceMenu)
                 {
+                    case 0:
+                        auth.CheckLogin();
+                        break;
                     case 1:
                         users.Add(CreateUser());
                         break;
@@ -51,12 +54,9 @@ namespace AuthApp
                         LoginMenu();
                         break;
                     case 7:
-                        auth.CheckLogin();
-                        break;
-                    case 8:
                         auth.Logout();
                         break;
-                    case 9:
+                    case 8:
                         run = false;
                         Console.WriteLine("APLIKASI DITUTUP..");
                         Console.WriteLine("===================================");
@@ -78,15 +78,18 @@ namespace AuthApp
             }
             Console.WriteLine("===================================");
             Console.WriteLine("Silahkan pilih menu:     ");
+            if (auth.UserName != null)
+            {
+                Console.WriteLine("0. Account");
+            }
             Console.WriteLine("1. Create User");
             Console.WriteLine("2. Edit User");
             Console.WriteLine("3. Delete User");
             Console.WriteLine("4. Show User");
             Console.WriteLine("5. Search User");
             Console.WriteLine("6. Login");
-            Console.WriteLine("7. Check Login");
-            Console.WriteLine("8. Logout");
-            Console.WriteLine("9. Exit");
+            Console.WriteLine("7. Logout");
+            Console.WriteLine("8. Exit");
             Console.Write("=> ");
         }
 
