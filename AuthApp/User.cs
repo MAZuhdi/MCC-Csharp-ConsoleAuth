@@ -38,5 +38,23 @@ namespace AuthApp
             Console.WriteLine($"Password    : {Password}");
         }
 
+        public bool Validate(string firstname, string lastname, string password)
+        {
+            if (!String.IsNullOrWhiteSpace(firstname) &&
+                !String.IsNullOrWhiteSpace(lastname) &&
+                !String.IsNullOrWhiteSpace(password) &&
+                firstname.Length >= 2 &&
+                lastname.Length >= 2)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            
+        }
+
+
     }
 }

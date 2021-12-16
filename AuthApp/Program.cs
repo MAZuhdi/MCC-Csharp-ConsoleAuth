@@ -108,8 +108,7 @@ namespace AuthApp
                     user.Password = Console.ReadLine();
                     user.SetUsername(users);
 
-                    if (!String.IsNullOrWhiteSpace(user.FirstName) && !String.IsNullOrWhiteSpace(user.LastName) &&  !String.IsNullOrWhiteSpace(user.Password) && user.FirstName.Length >= 2 && user.LastName.Length >= 2)
-                        //if (user.FirstName != "" && user.LastName != "" && user.Password != "" && user.FirstName.Length >= 2 && user.LastName.Length >= 2)
+                    if (user.Validate(user.FirstName, user.LastName, user.Password))
                     {
                         Console.WriteLine("\nUser Created!");
                     }
@@ -157,13 +156,23 @@ namespace AuthApp
             Console.WriteLine("====================");
             Console.Write("Search Username: ");
             string searchedUsername = Console.ReadLine();
+            User SearchResult = null;
+
             foreach (User user in users)
             {
                 if (user.UserName == searchedUsername)
                 {
-                    user.Details();
+                    SearchResult = user;
                     break;
                 }
+            }
+
+            if (SearchResult != null)
+            {
+                SearchResult.Details();
+            }
+            else
+            {
                 Console.WriteLine("Username tidak ditemukan");
             }
             Console.WriteLine("\nTekan apa saja untuk kembali..");
@@ -233,7 +242,7 @@ namespace AuthApp
                         Console.Write("Password: ");
                         string password = Console.ReadLine();
 
-                        if (firstName != String.Empty && lastName != String.Empty && password != String.Empty && firstName.Length >=2 && lastName.Length >=2)
+                        if (editUser.Validate(firstName, lastName, password))
                         {
                             editUser.FirstName = firstName;
                             editUser.LastName = lastName;
