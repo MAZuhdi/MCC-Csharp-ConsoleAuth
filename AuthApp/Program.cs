@@ -123,7 +123,8 @@ namespace AuthApp
                     Console.Write("Nama Belakang: ");
                     user.LastName = Console.ReadLine();
                     Console.Write("Password: ");
-                    user.Password = Console.ReadLine();
+                    string hasPassword = BCrypt.Net.BCrypt.HashPassword(Console.ReadLine());
+                    user.Password = hasPassword;
                     user.SetUsername(users);
 
                     if (user.Validate(user.FirstName, user.LastName, user.Password))
@@ -261,7 +262,8 @@ namespace AuthApp
                         Console.Write("Nama Belakang: ");
                         string lastName = Console.ReadLine();
                         Console.Write("Password: ");
-                        string password = Console.ReadLine();
+                        string hasPassword = BCrypt.Net.BCrypt.HashPassword(Console.ReadLine());
+                        string password = hasPassword;
 
                         if (editUser.Validate(firstName, lastName, password))
                         {
