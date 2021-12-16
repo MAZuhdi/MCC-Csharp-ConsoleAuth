@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+
 
 namespace AuthApp
 {
@@ -50,21 +52,17 @@ namespace AuthApp
                     case 5:
                         SearchUser();
                         break;
-                    
                     case 6:
-                    if (auth.UserName == null)
-                    {
-                      LoginMenu();
-                      break;
-                    }
-                    else
-                    {
-                      auth.Logout();
-                      break;
-                    }   
-                    //case 7:
-                    //    auth.Logout();
-                    //    break;
+                        if (!auth.IsLogin())
+                        {
+                          LoginMenu();
+                          break;
+                        }
+                        else
+                        {
+                          auth.Logout();
+                          break;
+                        }   
                     case 99:
                         run = false;
                         Console.WriteLine("APLIKASI DITUTUP..");
@@ -81,13 +79,13 @@ namespace AuthApp
         {
             Console.WriteLine("===================================");
             Console.WriteLine("========= Selamat datang ==========");
-            if (auth.FirstName != null)
+            if (auth.IsLogin())
             {
                 Console.WriteLine("Halo, " + auth.FirstName);
             }
             Console.WriteLine("===================================");
             Console.WriteLine("Silahkan pilih menu:     ");
-            if (auth.UserName != null)
+            if (auth.IsLogin())
             {
                 Console.WriteLine("0. Account");
             }
@@ -96,7 +94,7 @@ namespace AuthApp
             Console.WriteLine("3. Delete User");
             Console.WriteLine("4. Show User");
             Console.WriteLine("5. Search User");
-            if(auth.UserName == null)
+            if(!auth.IsLogin())
             { 
             Console.WriteLine("6. Login");
             }
@@ -173,26 +171,30 @@ namespace AuthApp
             Console.Clear();
             Console.WriteLine ("5. Search User");
             Console.WriteLine("====================");
-            Console.Write("Search Username: ");
-            string searchedUsername = Console.ReadLine();
-            User SearchResult = null;
-
+            Console.Write("Search : ");
+            string searchQuery = Console.ReadLine().ToLower();
+            List<User> SearchResult = new List<User>();
+            //disini pake ignore case
             foreach (User user in users)
             {
-                if (user.UserName == searchedUsername)
+                if (user.FirstName.ToLower().Contains(searchQuery) ||
+                    user.LastName.ToLower().Contains(searchQuery) ||
+                    user.UserName.ToLower().Contains(searchQuery))
                 {
-                    SearchResult = user;
-                    break;
+                    SearchResult.Add(user);
                 }
             }
 
-            if (SearchResult != null)
+            if (SearchResult.Count > 0)
             {
-                SearchResult.Details();
+                foreach (User user in SearchResult)
+                {
+                    user.Details();
+                }
             }
             else
             {
-                Console.WriteLine("Username tidak ditemukan");
+                Console.WriteLine("User tidak ditemukan");
             }
             Console.WriteLine("\nTekan apa saja untuk kembali..");
             Console.ReadKey();

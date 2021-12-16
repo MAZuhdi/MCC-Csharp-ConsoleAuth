@@ -32,10 +32,7 @@ namespace AuthApp
 
         public void CheckLogin()
         {
-            if (FirstName != null && 
-                LastName != null && 
-                UserName != null && 
-                Password != null)
+            if (IsLogin())
             {
                 Console.Clear();
                 Console.WriteLine("Check Login");
@@ -55,10 +52,7 @@ namespace AuthApp
         public void Logout()
         {
             Console.WriteLine("Berhasil Logout");
-            if (FirstName != null &&
-                LastName != null &&
-                UserName != null &&
-                Password != null)
+            if (IsLogin())
             {
                 FirstName = null;
                 LastName = null;
@@ -75,6 +69,21 @@ namespace AuthApp
                 Console.WriteLine("Input salah");
                 Console.WriteLine("Tekan apa saja untuk kembali..");
                 Console.ReadKey();
+            }
+        }
+
+        public bool IsLogin()
+        {
+            if (FirstName != null &&
+                LastName != null &&
+                UserName != null &&
+                Password != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 
