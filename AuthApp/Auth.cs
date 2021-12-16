@@ -72,7 +72,7 @@ namespace AuthApp
             else
             {
                 Console.Clear();
-                Console.WriteLine("Anda belum login");
+                Console.WriteLine("Input salah");
                 Console.WriteLine("Tekan apa saja untuk kembali..");
                 Console.ReadKey();
             }
