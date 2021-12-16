@@ -68,6 +68,7 @@ namespace AuthApp
                         Console.WriteLine("APLIKASI DITUTUP..");
                         Console.WriteLine("===================================");
                         Console.WriteLine("Terima Kasih telah menggunakan aplikasi kami");
+                        Console.WriteLine("===================================");
                         break;
                     default:
                         break;
@@ -85,6 +86,7 @@ namespace AuthApp
             }
             Console.WriteLine("===================================");
             Console.WriteLine("Silahkan pilih menu:     ");
+            Console.WriteLine("===================================");
             if (auth.IsLogin())
             {
                 Console.WriteLine("0. Account");
